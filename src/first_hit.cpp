@@ -10,7 +10,28 @@ bool first_hit(
 {
   ////////////////////////////////////////////////////////////////////////////
   // Replace with your code here:
-  return false;
+  int index = 0;
+  double closest = 0;
+  std::vector<std::shared_ptr<Object>>::iterator it;
+  //output
+  double temp_t = 0;
+  Eigen::Vector3d temp_n;
+
+  for (auto & it : objects) {
+    if (it->intersect(ray, min_t,temp_t,temp_n))
+    {
+      if (temp_t >= min_t && (temp_t < closest || closest == 0) )
+      {
+        closest = temp_t;
+        t = temp_t;
+        hit_id = index;
+        n = temp_n;
+      }
+      
+    }
+    index ++;
+  }
+  return true;
   ////////////////////////////////////////////////////////////////////////////
 }
 
